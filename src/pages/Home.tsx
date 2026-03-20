@@ -1,6 +1,10 @@
 
 import React, { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
+import TKSLOGO from '../assets/images/Navbar/logo2.webp';
+import NYKSLOGO from '../assets/images/Home/NYKS_LOGO.webp';
+import groupPhoto from '../assets/images/Home/groupphoto2.webp';
+
 
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -35,15 +39,22 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 z-10"></div>
           <div className="w-full h-full bg-gradient-to-r from-martial-black via-martial-red/20 to-martial-black animate-fade-in">
             {/* Placeholder for video - in real implementation, use <video> tag */}
-            <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2070')] bg-cover bg-center bg-fixed"></div>
+            <div className="w-full h-full bg-cover bg-center bg-fixed" >{/*style={{ backgroundImage: `url(${groupPhoto})` }}*/}
+              <img
+                src={groupPhoto}
+                alt="Group photo"
+                className="absolute top-0 left-0 w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
 
         {/* Hero Content */}
         <div className="relative z-20 text-center text-white animate-fade-in">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 text-3d animate-text-glow">
-            DRAGON ACADEMY
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-3d animate-text-glow">
+            THOLKODU SILAMBTTA KAZHAGAM
           </h1>
+
           <p className="text-xl md:text-2xl mb-8 animate-slide-in-left delay-300">
             Master the Art of Self-Defense & Discipline
           </p>
@@ -66,31 +77,44 @@ const Home = () => {
       <section ref={storyRef} className="py-20 bg-gradient-to-b from-martial-black to-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 gradient-text">
-              Our Legacy
+            <div className="flex justify-center items-center space-x-6 mb-6">
+              <img src={TKSLOGO} alt="tholkodu-silambam-logo" className="h-16 w-auto" />
+              <img src={NYKSLOGO} alt="NYKS-logo" className="h-16 w-auto" />
+            </div>
+
+            <p className="text-center text-lg text-gray-200 font-semibold mb-2">
+              Nehru Yuva Kendra Sangathan certified academy
+            </p>
+
+            <p className="text-center text-xl font-bold text-yellow-400 mb-10">
+              Serial No: <span className="bg-white text-black px-3 py-1 rounded">SLNO:406/2023-24</span>
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 gradient-text leading-normal pb-2">
+              Silambam Is Our Breath
             </h2>
+
             <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
               <p className="animate-slide-in-left">
-                For over three decades, Dragon Academy has been the premier destination for martial arts training, 
-                combining ancient traditions with modern techniques to create warriors of both body and spirit.
+                Silambam is a weapon-based art that originated in Tamil Nadu. The father of Silambam is an Agasthiyar. He learns silambam from his guru, Lord Murugan, which is historical myth content.
+                It was 1000 years ago when people were walking so many kilometers, so they picked up a stick for their walking purpose, and they faced wild animals, so they defeated them with the use of sticks by natural thinking without a format.
               </p>
               <p className="animate-slide-in-right delay-200">
-                Our masters have trained champions, but more importantly, we've shaped character, instilled discipline, 
-                and built confidence in thousands of students from all walks of life.
+                In the initial technical stage, they don't know the tricks; then Agasthiyar and Bothidharma learn the technique and take it all across Asia.
+                The first thought of the silambam is the beauty and grace of the movement, but we all know the dangers behind beauty.
               </p>
               <p className="animate-fade-in delay-400">
-                Whether you're seeking self-defense, fitness, mental clarity, or competitive excellence, 
-                our comprehensive programs will guide you on your martial arts journey.
+                Silambam is not an art; it's like a natural medicine without any doctors. then it's one kind of meditation where both your body and mind focus on a particular activity.
+                Silambam doesn't have equality between genders; all are the same in this art. So ready to learn silambam.
               </p>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
               {[
-                { number: '30+', label: 'Years of Excellence' },
-                { number: '5000+', label: 'Students Trained' },
-                { number: '15+', label: 'Master Instructors' },
-                { number: '50+', label: 'Championships Won' }
+                { number: '5+', label: 'Classes' },
+                { number: '200+', label: 'Students Trained' },
+                { number: '12+', label: 'Events Done' },
+                { number: '12+', label: 'Meetings' }
               ].map((stat, index) => (
                 <div key={index} className="text-center animate-scale-in card-3d" style={{ animationDelay: `${index * 0.1}s` }}>
                   <div className="text-3xl md:text-4xl font-bold text-martial-gold mb-2">
@@ -110,19 +134,11 @@ const Home = () => {
       <section className="py-20 gradient-bg">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 animate-fade-in">
-            Begin Your Journey Today
+            Begin Your Silambam Journey Today
           </h2>
-          <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto animate-slide-in-left">
-            Join our community of dedicated martial artists and discover your true potential.
+          <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto animate-slide-in-left">
+            Join our community of dedicated silambam trainers and discover your true potential.
           </p>
-          <div className="space-x-6">
-            <button className="bg-white text-martial-red hover:bg-gray-100 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 animate-scale-in">
-              Free Trial Class
-            </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-martial-red px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 animate-scale-in delay-200">
-              View Programs
-            </button>
-          </div>
         </div>
       </section>
     </div>

@@ -22,28 +22,47 @@ const Locations = () => {
 
   const locations = [
     {
-      name: 'Downtown Headquarters',
-      address: '123 Dragon Street, Downtown, NY 10001',
-      phone: '(555) 123-4567',
-      description: 'Our flagship location featuring state-of-the-art training facilities, multiple dojos, and specialized equipment for all martial arts disciplines.',
-      mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25090129c363d%3A0x40c6a5770d25022b!2sStatue%20of%20Liberty!5e0!3m2!1sen!2sus!4v1635959592107!5m2!1sen!2sus',
-      features: ['3 Training Halls', 'Pro Shop', 'Locker Rooms', 'Meditation Room']
+      name: 'Anna Nagar - Varasakthi Vinayagar Kovil',
+      addressLines: [
+        'Anna Nagar, Varasakthi Vinayagar Kovil,',
+        'Near VAO Office,',
+        'Vanniyangudi Panchayat Office Front Side,',
+        'Sivagangai-630561.'
+      ],
+      phoneLines: ['+91 8489256107', '+91 7010717593'],
+      description: 'Training venue near the VAO Office, Sivagangai.',
+      // Map embed is reused from the Contact page (no exact embed was provided for each specific spot).
+      mapUrl:
+        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin',
+      // (features removed)
     },
     {
-      name: 'Westside Branch',
-      address: '456 Warrior Avenue, Westside, NY 10002',
-      phone: '(555) 234-5678',
-      description: 'Our family-friendly location specializing in youth programs and beginner classes, with a focus on building confidence and character.',
-      mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25090129c363d%3A0x40c6a5770d25022b!2sStatue%20of%20Liberty!5e0!3m2!1sen!2sus!4v1635959592107!5m2!1sen!2sus',
-      features: ['Kids Programs', 'Family Classes', 'Birthday Parties', 'After School Care']
+      name: 'Pillaivayal Kali Amman Kovil',
+      addressLines: ['Pillaivayal Kali Amman Kovil (Front side),', 'Sivagangai-630561.'],
+      phoneLines: ['+91 8489256107', '+91 7010717593'],
+      description: 'Training venue near Pillaivayal Kali Amman Kovil.',
+      mapUrl:
+        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin',
+      // (features removed)
     },
     {
-      name: 'Eastside Elite',
-      address: '789 Samurai Boulevard, Eastside, NY 10003',
-      phone: '(555) 345-6789',
-      description: 'Our premium location for advanced training and competition preparation, equipped with professional-grade facilities and expert instruction.',
-      mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25090129c363d%3A0x40c6a5770d25022b!2sStatue%20of%20Liberty!5e0!3m2!1sen!2sus!4v1635959592107!5m2!1sen!2sus',
-      features: ['Competition Training', 'Private Lessons', 'Elite Programs', 'Recovery Center']
+      name: 'Pazhamalai Nagar (Free Coaching)',
+      addressLines: ['Pazhamalai Nagar[Free coaching],', 'Thondi Road,', 'Sivagangai-630561.'],
+      phoneLines: ['+91 8489256107', '+91 7010717593'],
+      description: 'Free coaching location on Thondi Road.',
+      mapUrl:
+        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin',
+      // (features removed)
+    }
+    ,
+    {
+      name: "ST. Justin's Matriculation Hr. Sec School",
+      addressLines: ['Madurai Road,', 'Sivagangai-630561.'],
+      phoneLines: ['+91 8489256107', '+91 7010717593'],
+      description: "Training venue near ST. Justin's Matriculation Hr. Sec School.",
+      mapUrl:
+        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin',
+      // (features removed)
     }
   ];
 
@@ -56,7 +75,7 @@ const Locations = () => {
             Our Locations
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto animate-slide-in-left">
-            Find the Dragon Academy location nearest to you and begin your martial arts journey today.
+            Find the Tholkodu Silambam location nearest to you and begin your martial arts journey today.
           </p>
         </div>
       </section>
@@ -96,43 +115,33 @@ const Locations = () => {
                       <div className="space-y-4 mb-6">
                         <div className="flex items-start animate-slide-in-right">
                           <MapPin className="text-martial-red mr-3 mt-1 flex-shrink-0" size={20} />
-                          <span className="text-gray-700">{location.address}</span>
+                          <span className="text-gray-700">
+                            {location.addressLines?.map((line, i) => (
+                              <React.Fragment key={i}>
+                                {line}
+                                {i < (location.addressLines?.length ?? 0) - 1 ? <br /> : null}
+                              </React.Fragment>
+                            ))}
+                          </span>
                         </div>
                         <div className="flex items-center animate-slide-in-right delay-100">
                           <svg className="w-5 h-5 text-martial-red mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
-                          <span className="text-gray-700">{location.phone}</span>
+                          <span className="text-gray-700">
+                            {location.phoneLines?.map((p, i) => (
+                              <React.Fragment key={i}>
+                                {p}
+                                {i < (location.phoneLines?.length ?? 0) - 1 ? <br /> : null}
+                              </React.Fragment>
+                            ))}
+                          </span>
                         </div>
                       </div>
 
                       <p className="text-gray-600 text-lg leading-relaxed mb-6 animate-fade-in delay-200">
                         {location.description}
                       </p>
-
-                      <div className="animate-scale-in delay-300">
-                        <h3 className="text-xl font-bold text-martial-black mb-3">Features:</h3>
-                        <div className="grid grid-cols-2 gap-2">
-                          {location.features.map((feature, featureIndex) => (
-                            <div
-                              key={featureIndex}
-                              className="flex items-center text-martial-red font-semibold"
-                            >
-                              <div className="w-2 h-2 bg-martial-gold rounded-full mr-3"></div>
-                              {feature}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mt-8 space-x-4">
-                        <button className="bg-martial-red hover:bg-martial-gold text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
-                          Visit This Location
-                        </button>
-                        <button className="border-2 border-martial-red text-martial-red hover:bg-martial-red hover:text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105">
-                          Get Directions
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -153,13 +162,13 @@ const Locations = () => {
           </p>
           <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
             <a
-              href="tel:+15551234567"
+              href="tel:+918489256107"
               className="bg-martial-red hover:bg-martial-gold text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg animate-scale-in"
             >
               Call Us Now
             </a>
             <a
-              href="mailto:info@dragonacademy.com"
+              href="mailto:tholkodusilambam@gmail.com"
               className="border-2 border-white text-white hover:bg-white hover:text-martial-black px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 animate-scale-in delay-200"
             >
               Send Email

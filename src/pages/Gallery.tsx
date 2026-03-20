@@ -5,40 +5,50 @@ const Gallery = () => {
   const [activeTab, setActiveTab] = useState('events');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  // Load all local images from `src/assets/images/Gallery/Training`
+  // and show them in the Training tab.
+  const trainingImageModules = import.meta.glob(
+    '../assets/images/Gallery/Training/*.{webp,WEBP}',
+    { eager: true, import: 'default' }
+  ) as Record<string, string>;
+  const trainingImages = Object.keys(trainingImageModules)
+    .sort((a, b) =>
+      a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
+    )
+    .map((key) => trainingImageModules[key]);
+
+  // Load all local images from `src/assets/images/Gallery/Events`
+  // and show them in the Events tab.
+  const eventsImageModules = import.meta.glob(
+    '../assets/images/Gallery/Events/*.{webp,WEBP}',
+    { eager: true, import: 'default' }
+  ) as Record<string, string>;
+  const eventsImages = Object.keys(eventsImageModules)
+    .sort((a, b) =>
+      a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
+    )
+    .map((key) => eventsImageModules[key]);
+
   const categories = {
     events: {
       title: 'Events',
-      images: [
-        'https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=2070',
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070',
-        'https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070',
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070',
-        'https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=2070',
-        'https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070'
-      ]
+      images: eventsImages
     },
     training: {
       title: 'Training',
-      images: [
-        'https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2070',
-        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070',
-        'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2070',
-        'https://images.unsplash.com/photo-1606787366850-de6ba7c7da87?q=80&w=2070',
-        'https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2070',
-        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070'
-      ]
+      images: trainingImages
     },
-    competitions: {
-      title: 'Competitions',
-      images: [
-        'https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070',
-        'https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=2070',
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070',
-        'https://images.unsplash.com/photo-1606787366850-de6ba7c7da87?q=80&w=2070',
-        'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2070',
-        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070'
-      ]
-    }
+    // competitions: {
+    //   title: 'Annual Day',
+    //   images: [
+    //     'https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070',
+    //     'https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=2070',
+    //     'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070',
+    //     'https://images.unsplash.com/photo-1606787366850-de6ba7c7da87?q=80&w=2070',
+    //     'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2070',
+    //     'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070'
+    //   ]
+    // }
   };
 
   const openLightbox = (image: string) => {
@@ -69,9 +79,9 @@ const Gallery = () => {
             Gallery
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto animate-slide-in-left">
-            Witness the intensity, dedication, and triumph of our martial arts community 
+            Witness the intensity, dedication, and triumph of our silambam community
             through these captured moments of excellence.
-          </p>
+          </p> 
         </div>
       </section>
 
@@ -85,11 +95,10 @@ const Gallery = () => {
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 mx-1 ${
-                    activeTab === key
+                  className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 mx-1 ${activeTab === key
                       ? 'bg-martial-red text-white shadow-lg transform scale-105'
                       : 'text-martial-black hover:bg-gray-100'
-                  }`}
+                    }`}
                 >
                   {category.title}
                 </button>
@@ -134,24 +143,31 @@ const Gallery = () => {
 
       {/* Lightbox */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={closeLightbox}>
-          <div className="relative max-w-4xl max-h-full">
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <div
+            className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
             <img
               src={selectedImage}
-              alt="Gallery preview"
-              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-scale-in"
+              alt="Full size preview"
+              className="object-contain max-w-full max-h-full rounded-lg shadow-2xl animate-scale-in"
             />
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 text-white hover:text-martial-gold transition-colors duration-300"
+              className="absolute top-6 right-6 text-white hover:text-martial-gold transition-colors duration-300"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
         </div>
       )}
+
 
       {/* Stats Section */}
       <section className="py-20 bg-martial-black text-white">
@@ -161,10 +177,10 @@ const Gallery = () => {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: '500+', label: 'Events Hosted' },
+              { number: '12+', label: 'Events Hosted' },
               { number: '50+', label: 'Tournaments Won' },
-              { number: '200+', label: 'Black Belts Awarded' },
-              { number: '25+', label: 'Years of Excellence' }
+              { number: '200+', label: 'Students Trained' },
+              { number: '2+', label: 'Years of Excellence' }
             ].map((stat, index) => (
               <div key={index} className="text-center animate-scale-in card-3d" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="text-4xl md:text-5xl font-bold text-martial-gold mb-2 animate-text-glow">

@@ -2,11 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronUp } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logo from "../assets/images/Navbar/logo2.webp"; // Adjust the path as necessary
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +43,11 @@ const Navbar = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="text-2xl font-bold gradient-text animate-text-glow">
-              Dragon Academy
+              <img
+                src={logo}
+                alt="Tholkodu Silambam Logo"
+                className="h-10 w-10 inline-block mr-2 hidden md:inline"></img>
+              Tholkodu Silambam
             </Link>
             
             <div className="hidden md:flex space-x-8">
@@ -48,7 +55,7 @@ const Navbar = () => {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`text-white hover:text-martial-gold transition-all duration-300 font-semibold relative ${
+                  className={`gradient-text hover:text-martial-gold transition-all duration-300 font-semibold relative ${
                     location.pathname === link.to ? 'text-martial-gold' : ''
                   }`}
                 >
@@ -59,16 +66,34 @@ const Navbar = () => {
                 </Link>
               ))}
             </div>
-
+  
             {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button className="text-white hover:text-martial-gold transition-colors">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-white hover:text-martial-gold transition-colors duration-300"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
           </div>
+          {/* Mobile Navigation */}
+        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+          isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="py-4 space-y-4 bg-gray-900/95 backdrop-blur-md rounded-lg mt-2">
+            {navLinks.map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                onClick={() => setIsOpen(false)}
+                className={`block px-20 py-1 text-white hover:text-martial-gold transition-colors duration-300 ${
+                  location.pathname === item.to ? 'text-martial-gold' : ''
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
         </div>
       </nav>
 

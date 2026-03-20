@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { MapPin, Mail, Phone, Clock } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { MapPin, Mail, Phone, Clock, MessageSquare } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,145 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState('');
+  const [chatMessages, setChatMessages] = useState<Array<{ role: 'user' | 'bot'; text: string }>>([
+    {
+      role: 'bot',
+      text: 'Hello! Welcome to Silambam training. How can I help you?'
+    }
+  ]);
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (isChatOpen) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chatMessages, isChatOpen]);
+
+  const normalizeText = (value: string) =>
+    value
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s]/g, '');
+
+  const formContactPhone1 = '+91 8489256107';
+  const formContactPhone2 = '+91 7010717593';
+
+  const getBotReply = (rawInput: string) => {
+    const text = normalizeText(rawInput);
+
+    const wantsFees = text.includes('fee') || text.includes('fees') || text.includes('cost');
+    const wantsTiming =
+      text.includes('timing') ||
+      text.includes('timings') ||
+      (text.includes('class') && text.includes('time')) ||
+      text.includes('class time');
+
+    // Fees / timings: always return the master contact numbers.
+    if (wantsFees) {
+      return `Fees depend on the course. Contact us at ${formContactPhone1} or ${formContactPhone2} for exact details.`;
+    }
+
+    if (wantsTiming) {
+      return `Class timings may vary. Contact us at ${formContactPhone1} or ${formContactPhone2} for details.`;
+    }
+
+    // Greetings
+    if (text.includes('good morning')) return 'Good morning! Ready to learn Silambam today?';
+    if (text.includes('good evening')) return 'Good evening! How can I help you with Silambam?';
+    if (/\bhi\b/.test(text) || text.startsWith('hi ')) return 'Hello! Welcome to Silambam training. How can I help you?';
+    if (/\bhello\b/.test(text) || text.startsWith('hello ')) return 'Hi there! Do you want to know about Silambam?';
+
+    // Closing
+    if (text.includes('thank you') || text.startsWith('thanks') || text === 'thank you' || text === 'thanks') {
+      return 'You’re welcome! Feel free to ask more about Silambam anytime.';
+    }
+
+    // Q&A mapping
+    if (text.includes('what is silambam') || (text.includes('silambam') && text.includes('what') && text.includes('is'))) {
+      return 'Silambam is an ancient Indian martial art that uses a long stick for fighting and self-defense.';
+    }
+
+    if ((text.includes('where') && text.includes('silambam') && (text.includes('start') || text.includes('started'))) || (text.includes('origin') && text.includes('silambam'))) {
+      return 'Silambam started in Tamil Nadu, India.';
+    }
+
+    if (text.includes('why') && text.includes('learn') && text.includes('silambam')) {
+      return 'People learn Silambam for self-defense, fitness, discipline, and confidence.';
+    }
+
+    if ((text.includes('what') && text.includes('used') && text.includes('silambam')) || (text.includes('bamboo') && text.includes('silambam')) || (text.includes('stick') && text.includes('silambam'))) {
+      return 'A long bamboo stick is mainly used in Silambam.';
+    }
+
+    if ((text.includes('children') || text.includes('kids')) && text.includes('silambam')) {
+      return 'Yes, children can learn Silambam from a young age.';
+    }
+
+    if (text.includes('benefit') && text.includes('silambam')) {
+      return 'It improves strength, speed, balance, and focus.';
+    }
+
+    if (text.includes('how long') && text.includes('silambam')) {
+      return 'It depends, but basic skills can be learned in a few months.';
+    }
+
+    if ((text.includes('duration') || text.includes('how long')) && text.includes('learn')) {
+      return 'It depends, but basic skills can be learned in a few months.';
+    }
+
+    if (text.includes('dangerous') || (text.includes('safe') && text.includes('silambam'))) {
+      return 'No, it is safe when practiced with proper training and guidance.';
+    }
+
+    if (text.includes('offer') && text.includes('class') && text.includes('silambam')) {
+      return 'Yes, we provide Silambam training classes.';
+    }
+
+    if (text.includes('do you offer classes') || (text.includes('classes') && text.includes('silambam'))) {
+      return 'Yes, we provide Silambam training classes.';
+    }
+
+    if (text.includes('trial') && (text.includes('class') || text.includes('classes'))) {
+      return 'No, we currently do not offer trial classes.';
+    }
+
+    if (text.includes('dress') || (text.includes('wear') && text.includes('silambam')) || text.includes('what should i wear')) {
+      return 'Wear comfortable sports clothes for easy movement.';
+    }
+
+    if (text.includes('fit') && (text.includes('join') || text.includes('joining') || text.includes('before'))) {
+      return 'No, you can join and improve your fitness during training.';
+    }
+
+    if (text.includes('advanced') && text.includes('silambam')) {
+      return 'Yes, advanced levels are available after basic training.';
+    }
+
+    // Fallback for anything not in the set
+    return 'Please send your message through the contact form on this page. We\'ll get back to you soon.';
+  };
+
+  const handleChatSend = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    const userText = chatInput.trim();
+    if (!userText) return;
+
+    setChatMessages((prev) => [...prev, { role: 'user', text: userText }]);
+    setChatInput('');
+
+    const reply = getBotReply(userText);
+    const shouldNudgeForm = reply.toLowerCase().includes('contact form');
+
+    setTimeout(() => {
+      setChatMessages((prev) => [...prev, { role: 'bot', text: reply }]);
+      if (shouldNudgeForm) {
+        document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 250);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -26,8 +165,19 @@ const Contact = () => {
 
     // Simulate form submission to Formspree
     try {
-      // In a real implementation, you would submit to Formspree here
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const formspreeEndpoint = "https://formspree.io/f/xyknvzby";
+
+      const form = e.currentTarget as HTMLFormElement;
+      const res = await fetch(formspreeEndpoint, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+
+      if (!res.ok) {
+        throw new Error(`Form submission failed with status ${res.status}`);
+      }
+
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '', program: '' });
     } catch (error) {
@@ -70,9 +220,9 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-martial-black mb-2">Main Address</h3>
                     <p className="text-gray-700">
-                      123 Dragon Street<br />
-                      Downtown, NY 10001<br />
-                      United States
+                     Anna Nagar, sakthi Vinayagar Kovil<br/>
+                     VAO Office, Vanniyangudi Panchayat Office Front Side,<br />
+                     Sivagangai-630561.
                     </p>
                   </div>
                 </div>
@@ -84,8 +234,8 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-martial-black mb-2">Phone</h3>
                     <p className="text-gray-700">
-                      Main: (555) 123-4567<br />
-                      Emergency: (555) 987-6543
+                      +91 8489256107<br />
+                      +91 7010717593
                     </p>
                   </div>
                 </div>
@@ -97,8 +247,8 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-martial-black mb-2">Email</h3>
                     <p className="text-gray-700">
-                      Info: info@dragonacademy.com<br />
-                      Admissions: admissions@dragonacademy.com
+                      tholkodusilambam@gmail.com<br />
+                      
                     </p>
                   </div>
                 </div>
@@ -110,9 +260,11 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-bold text-martial-black mb-2">Hours</h3>
                     <p className="text-gray-700">
-                      Monday - Friday: 6:00 AM - 10:00 PM<br />
-                      Saturday: 8:00 AM - 8:00 PM<br />
-                      Sunday: 9:00 AM - 6:00 PM
+                      Sunday, 6:30–8.00 AM <br />
+                      Monday, 6:30–8.00 AM <br />
+                      Friday, 6:30–8.00 AM <br />
+                      Saturday, 6:30–8.00 AM <br />
+
                     </p>
                   </div>
                 </div>
@@ -121,15 +273,13 @@ const Contact = () => {
               {/* Map */}
               <div className="mt-12">
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25090129c363d%3A0x40c6a5770d25022b!2sStatue%20of%20Liberty!5e0!3m2!1sen!2sus!4v1635959592107!5m2!1sen!2sus"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
                 </div>
               </div>
             </div>
@@ -158,7 +308,7 @@ const Contact = () => {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form id="contact-form" onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-martial-black font-semibold mb-2">
@@ -206,26 +356,6 @@ const Contact = () => {
                           className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-martial-red focus:outline-none transition-all duration-300 hover:border-martial-gold"
                           placeholder="Enter your phone number"
                         />
-                      </div>
-                      <div>
-                        <label htmlFor="program" className="block text-martial-black font-semibold mb-2">
-                          Program Interest
-                        </label>
-                        <select
-                          id="program"
-                          name="program"
-                          value={formData.program}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-martial-red focus:outline-none transition-all duration-300 hover:border-martial-gold"
-                        >
-                          <option value="">Select a program</option>
-                          <option value="karate">Karate</option>
-                          <option value="kung-fu">Kung Fu</option>
-                          <option value="bjj">Brazilian Jiu-Jitsu</option>
-                          <option value="mma">Mixed Martial Arts</option>
-                          <option value="kids">Kids Programs</option>
-                          <option value="fitness">Martial Arts Fitness</option>
-                        </select>
                       </div>
                     </div>
 
@@ -292,7 +422,7 @@ const Contact = () => {
               },
               {
                 question: "Do you offer trial classes?",
-                answer: "Yes! We offer a free trial class for new students. This gives you a chance to experience our teaching style and facilities before committing to a program."
+                answer: "No, we currently do not offer trial classes. However, we ensure high-quality learning from the very beginning and provide full support throughout the classes."
               }
             ].map((faq, index) => (
               <div key={index} className="bg-gray-800 rounded-2xl p-6 animate-slide-in-left" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -303,6 +433,70 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* Floating Chatbot */}
+      <div className="fixed bottom-6 right-6 z-50">
+        {isChatOpen ? (
+          <div className="w-96 max-w-[90vw] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+            <div className="flex items-center justify-between bg-martial-red text-white px-4 py-3">
+              <div className="flex items-center gap-3">
+                <MessageSquare size={20} />
+                <div className="font-bold">Silambam Assistant</div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsChatOpen(false)}
+                className="text-white/90 hover:text-white font-bold text-xl leading-none"
+                aria-label="Close chat"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="bg-gray-50 h-80 overflow-y-auto p-4 space-y-3">
+              {chatMessages.map((m, idx) => (
+                <div key={idx} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
+                  <div
+                    className={
+                      m.role === 'user'
+                        ? 'max-w-[80%] bg-martial-black text-white px-4 py-2 rounded-2xl'
+                        : 'max-w-[80%] bg-white text-martial-black px-4 py-2 rounded-2xl border border-gray-200'
+                    }
+                  >
+                    {m.text}
+                  </div>
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+
+            <form onSubmit={handleChatSend} className="p-3 border-t border-gray-200 bg-white flex gap-2">
+              <input
+                value={chatInput}
+                onChange={(ev) => setChatInput(ev.target.value)}
+                placeholder="Type your question..."
+                className="flex-1 px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-martial-red"
+              />
+              <button
+                type="submit"
+                disabled={!chatInput.trim()}
+                className="bg-martial-red hover:bg-martial-gold text-white px-4 py-2 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Send
+              </button>
+            </form>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setIsChatOpen(true)}
+            className="w-14 h-14 rounded-full bg-martial-red hover:bg-martial-gold text-white shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-105"
+            aria-label="Open chat"
+          >
+            <MessageSquare size={22} />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
