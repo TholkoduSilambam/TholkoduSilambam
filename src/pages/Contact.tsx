@@ -252,12 +252,6 @@ const Contact = () => {
                     </p>
                   </div>
                 </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="bg-martial-red text-white p-3 rounded-full">
-                    <Clock size={24} />
-                  </div>
-                </div>
               </div>
 
               {/* Map */}
