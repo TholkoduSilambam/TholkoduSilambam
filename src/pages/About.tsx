@@ -25,22 +25,19 @@ const About = () => {
     {
       name: 'Master K. Sathish Kumar, M.Sc. (Chemistry)',
       title: 'Founder & Coach of Tholkodu Silambatta Kazhagam',
-      experience: '50+ Years Experience',
-      bio: 'I am very passionate about Silambam, a national-level gold medalist. I try to improve the next generation in silambam. Member of Tamil Nadu Kalai Panpattu Thurai.',
+      bio: 'I am deeply passionate about Silambam and have achieved distinction as a national-level gold medalist. I also serve as a National Referee in Silambam, contributing to the sport at an official level. I am committed to nurturing and developing the next generation of practitioners, helping them grow in skill and discipline. Additionally, I am a proud member of the Tamil Nadu Kalai Panpattu Thurai.',
       image: SathisMaster
     },
     {
       name: 'Master N. Pradeep, B.E. (Mechanical) and B.A. (Sociology)',
       title: 'Head Coach in Tholkodu Silambatta Kazhagam.',
-      experience: '50+ Years Experience',
-      bio: 'International-level Gold Medalist, CM Trophy Winner, and also a member of Tamil Nadu Kalai Panpattu Thurai.',
+      bio: 'I am an international-level gold medalist and CM Trophy winner in Silambam, currently serving as a National Referee. I am also a proud member of the Tamil Nadu Kalai Panpattu Thurai, contributing to the promotion and development of this traditional martial art.',
       image: PradeepMaster
     },
     {
       name: 'Master S. Bhuvaneshvaran, B.A. (Economy)',
       title: 'Senior trainer of Tholkodu Silambatta Kazhagam.',
-      experience: '50+ Years Experience',
-      bio: 'National-level gold medalist in Goa, district-level gold medalist in Nehru Yuva Kendra. He is a very hard worker and sincere in his work.',
+      bio: 'I am a national-level gold medalist in Silambam (Goa) and a district-level gold medalist under Nehru Yuva Kendra. Recognized as a State Referee by the Tamil Nadu Silambam Association, I consistently demonstrate dedication, discipline, and a strong work ethic in all my endeavors.',
       image: BhuvaneshMaster
     }
   ];

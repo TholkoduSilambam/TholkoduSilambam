@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import TKSLOGO from '../assets/images/Navbar/logo2.webp';
-import NYKSLOGO from '../assets/images/Home/NYKS_LOGO.webp';
+import MyBharatLogo from '../assets/images/Home/mybharatlogo.webp';
 import groupPhoto from '../assets/images/Home/groupphoto2.webp';
 
 
@@ -52,7 +52,7 @@ const Home = () => {
         {/* Hero Content */}
         <div className="relative z-20 text-center text-white animate-fade-in">
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-3d animate-text-glow">
-            THOLKODU SILAMBTTA KAZHAGAM
+            THOLKODU SILAMBAM
           </h1>
 
           <p className="text-xl md:text-2xl mb-8 animate-slide-in-left delay-300">
@@ -79,11 +79,11 @@ const Home = () => {
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex justify-center items-center space-x-6 mb-6">
               <img src={TKSLOGO} alt="tholkodu-silambam-logo" className="h-16 w-auto" />
-              <img src={NYKSLOGO} alt="NYKS-logo" className="h-16 w-auto" />
+              <img src={MyBharatLogo} alt="MyBharat-logo" className="h-16 w-auto" />
             </div>
 
             <p className="text-center text-lg text-gray-200 font-semibold mb-2">
-              Nehru Yuva Kendra Sangathan certified academy
+              MY Bharat certified academy
             </p>
 
             <p className="text-center text-xl font-bold text-yellow-400 mb-10">
@@ -95,14 +95,18 @@ const Home = () => {
 
             <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
               <p className="animate-slide-in-left">
+                Tholkodu Silambam is officially registered under the Tamil Nadu Art and Culture Department and is an esteemed member of the Tamil Nadu Kalai Panpattu Thurai.
+                Additionally, we are certified by MY Bharat, reflecting our commitment to maintaining the highest standards of quality, authenticity, and excellence in training.
+              </p>
+              <p className="animate-slide-in-right delay-200">
                 Silambam is a weapon-based art that originated in Tamil Nadu. The father of Silambam is an Agasthiyar. He learns silambam from his guru, Lord Murugan, which is historical myth content.
                 It was 1000 years ago when people were walking so many kilometers, so they picked up a stick for their walking purpose, and they faced wild animals, so they defeated them with the use of sticks by natural thinking without a format.
               </p>
-              <p className="animate-slide-in-right delay-200">
+              <p className="animate-slide-in-left delay-400">
                 In the initial technical stage, they don't know the tricks; then Agasthiyar and Bothidharma learn the technique and take it all across Asia.
                 The first thought of the silambam is the beauty and grace of the movement, but we all know the dangers behind beauty.
               </p>
-              <p className="animate-fade-in delay-400">
+              <p className="animate-fade-in delay-600">
                 Silambam is not an art; it's like a natural medicine without any doctors. then it's one kind of meditation where both your body and mind focus on a particular activity.
                 Silambam doesn't have equality between genders; all are the same in this art. So ready to learn silambam.
               </p>
