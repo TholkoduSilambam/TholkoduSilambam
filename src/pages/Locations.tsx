@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { MapPin } from 'lucide-react';
+import { Clock, MapPin } from 'lucide-react';
 
 const Locations = () => {
   const locationsRef = useRef<HTMLDivElement>(null);
@@ -23,11 +23,12 @@ const Locations = () => {
   const locations = [
     {
       name: 'Anna Nagar - Varasakthi Vinayagar Kovil',
+      timings: 'Saturday & Sunday (6.30 AM to 8.00 AM)',
       addressLines: [
         'Anna Nagar, Varasakthi Vinayagar Kovil,',
         'Near VAO Office,',
         'Vanniyangudi Panchayat Office Front Side,',
-        'Sivagangai-630561.'
+        'Sivagangai', 'Tamil Nadu - 630561.'
       ],
       phoneLines: ['+91 8489256107', '+91 7010717593'],
       description: 'Training venue near the VAO Office, Sivagangai.',
@@ -38,30 +39,52 @@ const Locations = () => {
     },
     {
       name: 'Pillaivayal Kali Amman Kovil',
-      addressLines: ['Pillaivayal Kali Amman Kovil (Front side),', 'Sivagangai-630561.'],
+      timings: 'Saturday & Sunday (4.30 PM to 5.30 PM)',
+      addressLines: ['Pillaivayal Kali Amman Kovil (Front side),', 'Sivagangai', 'Tamil Nadu - 630561.'],
       phoneLines: ['+91 8489256107', '+91 7010717593'],
       description: 'Training venue near Pillaivayal Kali Amman Kovil.',
       mapUrl:
-        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin',
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.14516747579!2d78.49105417478296!3d9.845512175674468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fadc69e5aa53%3A0xc222958d60b22bd0!2sPillaivayal%20Arulmigu%20Kaliamman%20Temple!5e1!3m2!1sen!2sin!4v1774005140030!5m2!1sen!2sin',
       // (features removed)
     },
     {
       name: 'Pazhamalai Nagar (Free Coaching)',
-      addressLines: ['Pazhamalai Nagar[Free coaching],', 'Thondi Road,', 'Sivagangai-630561.'],
+      addressLines: ['Pazhamalai Nagar[Free coaching],', 'Thondi Road,', 'Sivagangai', 'Tamil Nadu - 630561.'],
       phoneLines: ['+91 8489256107', '+91 7010717593'],
       description: 'Free coaching location on Thondi Road.',
       mapUrl:
-        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin',
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.0546500468367!2d78.50617867478309!3d9.853452275539718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb1e6f68b339%3A0x65a5f121ccd84ad8!2sOliOli%20Foundation!5e1!3m2!1sen!2sin!4v1774005551753!5m2!1sen!2sin',
       // (features removed)
     }
     ,
     {
       name: "ST. Justin's Matriculation Hr. Sec School",
-      addressLines: ['Madurai Road,', 'Sivagangai-630561.'],
+      timings: "Saturday (3.00 PM to 4.00 PM), Sunday (9.30 AM to 10.30 AM)",
+      addressLines: ['Madurai Road,', 'Sivagangai', 'Tamil Nadu - 630561.'],
       phoneLines: ['+91 8489256107', '+91 7010717593'],
-      description: "Training venue near ST. Justin's Matriculation Hr. Sec School.",
+      description: "Training venue ST. Justin's Matriculation Hr. Sec School.",
       mapUrl:
-        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15048.396991041343!2d78.502929!3d9.849541!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fb005241854f%3A0x601b5cb586933f25!2sTholkodu%20silambam!5e1!3m2!1sen!2sin!4v1773998483945!5m2!1sen!2sin',
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15048.492796515715!2d78.4630971871582!3d9.847439800000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fad1978fb2b7%3A0x65b78453c4b3e3e0!2sSt%20Justins%20Girls%20Higher%20Secondary%20School!5e1!3m2!1sen!2sin!4v1774005651814!5m2!1sen!2sin',
+      // (features removed)
+    },
+        {
+      name: "St.Michael Matriculation Hr. Sec. School",
+      timings: 'Thursday & Friday (4.30 PM to 5.30 PM)',
+      addressLines: ['Rajaduraisingham', 'Sivaganga', 'Tamil Nadu - 630561.'],
+      phoneLines: ['+91 8489256107', '+91 7010717593'],
+      description: "Training venue near St.Michael Matriculation Hr. Sec School.",
+      mapUrl:
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.0964983000745!2d78.47483517478305!3d9.849782175602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00fad262792369%3A0x7dee1ad9e23f1161!2sSt.Michael%20Matriculation%20Hr.%20Sec.%20School!5e1!3m2!1sen!2sin!4v1774005742080!5m2!1sen!2sin',
+      // (features removed)
+    },
+        {
+      name: "Govt Hr Sec School Idayamelur",
+      timings: 'Saturday & Sunday (4.30 PM to 5.30 PM)',
+      addressLines: ['Idayamelur', 'Sivagangai', 'Tamil Nadu - 630552'],
+      phoneLines: ['+91 8489256107', '+91 7010717593'],
+      description: "Training venue Govt Hr Sec School Idayamelur.",
+      mapUrl:
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7522.741151685377!2d78.4466091904398!3d9.913254979437843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00efb80d0f6a87%3A0x2ca75bd6f2a74fe5!2sGovt%20Hr%20Sec%20School%20Idayamelur!5e1!3m2!1sen!2sin!4v1774006067952!5m2!1sen!2sin',
       // (features removed)
     }
   ];
@@ -137,6 +160,14 @@ const Locations = () => {
                             ))}
                           </span>
                         </div>
+                        {location.timings ? (
+                          <div className="flex items-center animate-slide-in-right delay-200">
+                            <Clock className="text-martial-red mr-3 flex-shrink-0" size={20} />
+                            <span className="text-gray-700">
+                              <span className="font-semibold">Timings:</span> {location.timings}
+                            </span>
+                          </div>
+                        ) : null}
                       </div>
 
                       <p className="text-gray-600 text-lg leading-relaxed mb-6 animate-fade-in delay-200">
