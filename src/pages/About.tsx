@@ -80,7 +80,7 @@ const About = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-martial-black/50 to-transparent rounded-2xl"></div>
                     <div className="absolute bottom-6 left-6 text-white">
-                      <div className="text-martial-gold font-bold text-lg">{master.experience}</div>
+                      <div className="text-martial-gold font-bold text-lg"></div>
                     </div>
                   </div>
                 </div>
